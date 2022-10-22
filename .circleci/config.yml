@@ -1,6 +1,5 @@
 version: 2.1
-
-          mentions: "@Azab":
+:
   slack: circleci/slack@4.10.1
 
 commands:
@@ -55,11 +54,9 @@ jobs:
           key: frontend-build
       - slack/notify:
           event: fail
-          mentions: "@Azab"
           template: basic_fail_1
       - slack/notify:
           event: pass
-          mentions: "@Azab"
           template: success_tagged_deploy_1
 
   build-backend:
@@ -81,11 +78,9 @@ jobs:
           key: backend-build
       - slack/notify:
           event: fail
-          mentions: "@Azab"
           template: basic_fail_1
       - slack/notify:
           event: pass
-          mentions: "@Azab"
           template: success_tagged_deploy_1
 
   test-frontend:
@@ -104,11 +99,9 @@ jobs:
             # exit 1
       - slack/notify:
           event: fail
-          mentions: "@Azab"
           template: basic_fail_1
       - slack/notify:
           event: pass
-          mentions: "@Azab"
           template: success_tagged_deploy_1
 
   test-backend:
@@ -127,11 +120,9 @@ jobs:
             #  exit 1
       - slack/notify:
           event: fail
-          mentions: "@Azab"
           template: basic_fail_1
       - slack/notify:
           event: pass
-          mentions: "@Azab"
           template: success_tagged_deploy_1
             
   scan-frontend:
@@ -150,11 +141,9 @@ jobs:
             #  exit 1
       - slack/notify:
           event: fail
-          mentions: "@Azab"
           template: basic_fail_1
       - slack/notify:
           event: pass
-          mentions: "@Azab"
           template: success_tagged_deploy_1
             
   scan-backend:
@@ -173,11 +162,9 @@ jobs:
             #  exit 1
       - slack/notify:
           event: fail
-          mentions: "@Azab"
           template: basic_fail_1
       - slack/notify:
           event: pass
-          mentions: "@Azab"
           template: success_tagged_deploy_1
 
 workflows:
