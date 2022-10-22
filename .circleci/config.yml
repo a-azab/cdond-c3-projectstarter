@@ -1,5 +1,6 @@
 version: 2.1
-orbs:
+
+          mentions: '@Azab':
   slack: circleci/slack@4.10.1
 
 commands:
@@ -52,6 +53,14 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
+      - slack/notify:
+          event: fail
+          mentions: '@Azab'
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          mentions: '@Azab'
+          template: success_tagged_deploy_1
 
   build-backend:
     docker:
@@ -70,6 +79,14 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
+      - slack/notify:
+          event: fail
+          mentions: '@Azab'
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          mentions: '@Azab'
+          template: success_tagged_deploy_1
 
   test-frontend:
     docker:
@@ -85,6 +102,14 @@ jobs:
             npm install
             npm run test
             # exit 1
+      - slack/notify:
+          event: fail
+          mentions: '@Azab'
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          mentions: '@Azab'
+          template: success_tagged_deploy_1
 
   test-backend:
     docker:
@@ -100,6 +125,14 @@ jobs:
             npm install
             npm run test
             #  exit 1
+      - slack/notify:
+          event: fail
+          mentions: '@Azab'
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          mentions: '@Azab'
+          template: success_tagged_deploy_1
             
   scan-frontend:
     docker:
@@ -121,6 +154,7 @@ jobs:
           template: basic_fail_1
       - slack/notify:
           event: pass
+          mentions: '@Azab'
           template: success_tagged_deploy_1
             
   scan-backend:
@@ -137,6 +171,14 @@ jobs:
             npm install
             npm audit fix --audit-level=critical --force
             #  exit 1
+      - slack/notify:
+          event: fail
+          mentions: '@Azab'
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          mentions: '@Azab'
+          template: success_tagged_deploy_1
 
 workflows:
   default:
