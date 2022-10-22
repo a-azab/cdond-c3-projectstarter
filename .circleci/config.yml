@@ -55,9 +55,11 @@ jobs:
           key: frontend-build
       - slack/notify:
           event: fail
+          channel: CI-Azab
           template: basic_fail_1
       - slack/notify:
           event: pass
+          channel: CI-Azab
           template: success_tagged_deploy_1
 
   build-backend:
@@ -79,9 +81,11 @@ jobs:
           key: backend-build
       - slack/notify:
           event: fail
+          channel: CI-Azab
           template: basic_fail_1
       - slack/notify:
           event: pass
+          channel: CI-Azab
           template: success_tagged_deploy_1
 
   test-frontend:
@@ -100,9 +104,11 @@ jobs:
             # exit 1
       - slack/notify:
           event: fail
+          channel: CI-Azab
           template: basic_fail_1
       - slack/notify:
           event: pass
+          channel: CI-Azab
           template: success_tagged_deploy_1
 
   test-backend:
@@ -121,9 +127,11 @@ jobs:
             #  exit 1
       - slack/notify:
           event: fail
+          channel: CI-Azab
           template: basic_fail_1
       - slack/notify:
           event: pass
+          channel: CI-Azab
           template: success_tagged_deploy_1
             
   scan-frontend:
@@ -142,9 +150,11 @@ jobs:
             #  exit 1
       - slack/notify:
           event: fail
+          channel: CI-Azab
           template: basic_fail_1
       - slack/notify:
           event: pass
+          channel: CI-Azab
           template: success_tagged_deploy_1
             
   scan-backend:
@@ -163,9 +173,11 @@ jobs:
             #  exit 1
       - slack/notify:
           event: fail
+          channel: CI-Azab
           template: basic_fail_1
       - slack/notify:
           event: pass
+          channel: CI-Azab
           template: success_tagged_deploy_1
 
 workflows:
@@ -173,11 +185,11 @@ workflows:
     jobs:
       - build-frontend
       - build-backend
-      - test-frontend:
-          requires: [build-frontend]
-      - test-backend:
-          requires: [build-backend]
-      - scan-backend:
-          requires: [build-backend]
-      - scan-frontend:
-          requires: [build-frontend]
+      # - test-frontend:
+      #     requires: [build-frontend]
+      # - test-backend:
+      #     requires: [build-backend]
+      # - scan-backend:
+      #     requires: [build-backend]
+      # - scan-frontend:
+      #     requires: [build-frontend]
