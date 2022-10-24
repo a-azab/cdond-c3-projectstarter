@@ -239,12 +239,13 @@ jobs:
           command: |
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
-                # If you are using memstash.io, generate the token "7933fe63-4687-4fa1-8426-aa25aa1730ec" on the website
-                # curl -H "Content-Type: text/plain" -H "token: EkGmiyny3WVFycP" --request PUT --data "1" https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7}
                 # If you are using kvdb.io, generate the bucket ID "Ppe3tLAkDhEX48ssFsVZPi" in your local terminal first
                 curl https://kvdb.io/9YKxBnCJpXX12T5yRvWPN7/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
-     # Here's where you will add some code to rollback on failure          
+     # Here's where you will add some code to rollback on failure       
+      - destroy-environment 
+      - revert-migrations
+
   deploy-frontend:
     docker:
       - image: cimg/base:stable
