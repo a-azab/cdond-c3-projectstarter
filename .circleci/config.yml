@@ -203,22 +203,40 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: cimg/base:stable
+      - image: python:3.7-alpine3.11
     steps:
       - checkout
-      - install_ansible
-      - install_awscli
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --update ansible
+            apk add --update tar
+            apk add --update gzip
+            apk add --no-cache \
+            python3 \
+            py3-pip \
+            && pip3 install --upgrade pip \
+            && pip3 install \
+            awscli \
+            && rm -rf /var/cache/apk/*
+            
       - add_ssh_keys:
-          fingerprints: ["a9:76:3e:ab:ed:12:7d:f4:ab:c6:3b:ea:c8:fc:e6:bb"]
-      # attach workspace
+          fingerprints: ["74:4b:62:99:e2:6f:b0:8c:38:be:02:74:a1:3e:f8:89"] 
       - attach_workspace:
           at: ~/
       - run:
-          name: Configure Server
+          name: Configure server
           command: |
             cd .circleci/ansible
             cat inventory.txt
+            ls
+            aws ec2 describe-instances \
+              --query 'Reservations[*].Instances[*].PublicIpAddress' \
+              --filters 'Name=instance-state-name,Values=running' \
+              --output text >> inventory.txt
+            cat inventory.txt
             ansible-playbook -i inventory.txt configure-server.yml
+          no_output_timeout: 30m
 
       # Here's where you will add some code to rollback on failure     
       - destroy-environment   
