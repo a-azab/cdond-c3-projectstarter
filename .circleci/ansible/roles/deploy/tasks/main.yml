@@ -34,4 +34,3 @@
     delay: 10
     timeout: 30
     state: started
-    msg: "Application server is not running"
