@@ -1,7 +1,7 @@
 - name: Copy project files
   become: true 
   copy:
-    src: /home/circleci/project/artifact.tar.gz
+    src: roles/deploy/files/artifact.tar.gz
     dest: "/var"
     owner: ubuntu
     group: ubuntu
