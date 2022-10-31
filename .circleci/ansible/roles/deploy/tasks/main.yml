@@ -11,7 +11,10 @@
   become: yes 
   shell: |
     tar -xf artifact.tar.gz
+    apt install net-tools -y
+    netstat -plnt
     pm2 start npm -- start
+    netstat -plnt
   args:
     chdir: /var
   environment:
