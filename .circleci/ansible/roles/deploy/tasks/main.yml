@@ -1,7 +1,7 @@
 - name: Copy project files
   become: true 
   copy:
-    src: roles/deploy/files/artifact.tar.gz
+    src: ~/project/artifact.tar.gz
     dest: "/var"
     owner: ubuntu
     group: ubuntu

@@ -330,6 +330,8 @@ jobs:
             export TYPEORM_MIGRATIONS=./migrations/*.ts
             cd .circleci/ansible
             cat inventory.txt
+            pwd
+            ls -al
             ansible-playbook -i inventory.txt deploy-backend.yml
       - destroy-environment
       - revert-migrations 
