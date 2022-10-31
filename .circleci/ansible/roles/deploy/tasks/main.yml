@@ -7,14 +7,10 @@
     group: ubuntu
     mode: 0777
 
-- name: Extract artifact.tar.gz into /var/
-  ansible.builtin.unarchive:
-    src: ~/project/backend/artifact.tar.gz
-    dest: /var
-
 - name: Start Backend with pm2
   become: yes 
   shell: |
+    tar -xf artifact.tar.gz
     pm2 start npm -- start
   args:
     chdir: /var
