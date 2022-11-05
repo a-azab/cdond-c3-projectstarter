@@ -15,6 +15,9 @@
     netstat -plnt
     pm2 start npm -- start
     netstat -plnt
+  register: command_output
+  - debug:
+    var: command_output.stdout_lines
   args:
     chdir: /var
   environment:
