@@ -16,8 +16,6 @@
     pm2 start npm -- start
     netstat -plnt
   register: command_output
-  - debug:
-    var: command_output.stdout_lines
   args:
     chdir: /var
   environment:
@@ -40,3 +38,6 @@
     delay: 10
     timeout: 30
     state: started
+
+- debug:
+  var: command_output.stdout_lines
