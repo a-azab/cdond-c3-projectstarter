@@ -13,7 +13,8 @@
     tar -xf artifact.tar.gz
     apt install net-tools -y
     netstat -plnt
-    pm2 start npm -- start
+    cd backend && pm2 start npm -- start
+    pm2 log &
     netstat -plnt
   register: command_output
   args:
