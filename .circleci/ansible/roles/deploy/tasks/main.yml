@@ -13,7 +13,10 @@
     tar -xf artifact.tar.gz
     apt install net-tools -y
     netstat -plnt
+    pm2 start
     pm2 start backend/dist/main.js --name="Backend"
+    pm2 ls
+    sleep 5
     pm2 log &
     netstat -plnt
   register: command_output
