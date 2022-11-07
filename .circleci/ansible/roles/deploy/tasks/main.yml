@@ -14,6 +14,8 @@
     apt install net-tools -y
     netstat -plnt
     pm2 start
+    sleep 5
+    pm2 ls
     pm2 start backend/dist/main.js --name="Backend"
     pm2 ls
     sleep 5
